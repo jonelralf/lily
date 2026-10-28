@@ -1,0 +1,1350 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="description" content="Guía paso a paso para crear tu portafolio o la web de un trabajo con Claude, GitHub y Vercel.">
+<meta property="og:title" content="El portafolio de Lily">
+<meta property="og:description" content="Guía paso a paso para crear tu portafolio o la web de un trabajo con Claude, GitHub y Vercel.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-100 -100 200 200'%3E%3Cg fill='%23C2346F'%3E%3Cellipse cx='0' cy='-50' rx='20' ry='44' transform='rotate(0)'/%3E%3Cellipse cx='0' cy='-50' rx='20' ry='44' transform='rotate(60)'/%3E%3Cellipse cx='0' cy='-50' rx='20' ry='44' transform='rotate(120)'/%3E%3Cellipse cx='0' cy='-50' rx='20' ry='44' transform='rotate(180)'/%3E%3Cellipse cx='0' cy='-50' rx='20' ry='44' transform='rotate(240)'/%3E%3Cellipse cx='0' cy='-50' rx='20' ry='44' transform='rotate(300)'/%3E%3C/g%3E%3Ccircle r='15' fill='%23C9692A'/%3E%3C/svg%3E">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}</style>
+<title>El portafolio de Lily</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Concepto: una guía con un lirio. Portada, elige qué crear (portafolio o web de un trabajo), taller/almacén/vitrina,
+   6 pasos = 6 pétalos que se abren (un lirio por cada web), diccionario, dudas y firma en el pie.
+   Columna de 1120px; en escritorio el lirio de progreso queda fijo a la izquierda de los pasos. Paleta de un lirio Stargazer. */
+:root {
+  /* Color */
+  --paper: #FFF7F9;        /* pétalo blanco */
+  --surface: #FFFFFF;
+  --blush: #FBE8EF;        /* rubor del pétalo */
+  --ink: #1E3229;          /* tallo oscuro */
+  --muted: #56665D;
+  --line: #EDD3DD;
+  --magenta: #C2346F;      /* centro del pétalo */
+  --magenta-deep: #8E1F4C; /* pecas */
+  --on-accent: #FFFFFF;
+  --stem: #2F6B4F;         /* tallo */
+  --stem-soft: #A8CDB7;
+  --pollen: #C9692A;       /* anteras */
+  --petal-mid: #EE9DBC;
+  --petal-tip: #FFFFFF;
+  --petal-edge: #E6B0C4;
+  --petal-shadow: rgba(194, 52, 111, .22);
+  --shadow: 0 1px 2px rgba(90, 24, 52, .06), 0 18px 40px -18px rgba(90, 24, 52, .28);
+  --shadow-sm: 0 1px 3px rgba(90, 24, 52, .14);
+  /* Tipo */
+  --display: "Bodoni Moda", "Bodoni 72", Didot, Georgia, serif;
+  --body: "Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --hand: "Caveat", "Segoe Print", "Bradley Hand", cursive;
+  --mono: "DM Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #111713; --surface: #18201B; --blush: #2A1C24; --ink: #F6EDF0; --muted: #A8B6AD; --line: #2E3B33;
+    --magenta: #F07AA8; --magenta-deep: #F7B2CC; --on-accent: #24101A; --stem: #88C4A3; --stem-soft: #4C7D64; --pollen: #EFA15F;
+    --petal-mid: #F5A9C6; --petal-tip: #FBE3EC; --petal-edge: #F0A8C3; --petal-shadow: rgba(0, 0, 0, .55);
+    --shadow: 0 1px 2px rgba(0, 0, 0, .45), 0 18px 40px -18px rgba(0, 0, 0, .8);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, .5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #111713; --surface: #18201B; --blush: #2A1C24; --ink: #F6EDF0; --muted: #A8B6AD; --line: #2E3B33;
+  --magenta: #F07AA8; --magenta-deep: #F7B2CC; --on-accent: #24101A; --stem: #88C4A3; --stem-soft: #4C7D64; --pollen: #EFA15F;
+  --petal-mid: #F5A9C6; --petal-tip: #FBE3EC; --petal-edge: #F0A8C3; --petal-shadow: rgba(0, 0, 0, .55);
+  --shadow: 0 1px 2px rgba(0, 0, 0, .45), 0 18px 40px -18px rgba(0, 0, 0, .8);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, .5);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 84px); -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 1.0625rem/1.65 var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+h1, h2, h3, p, ul, ol, dl, dd, figure, table { margin: 0; }
+h1, h2, h3 { text-wrap: balance; }
+h1, h2, .tool h3, .step h3, .mode-card h3, .many h3 { font-family: var(--display); font-weight: 600; letter-spacing: -.012em; font-optical-sizing: auto; }
+a { color: var(--magenta); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--magenta-deep); }
+:focus-visible { outline: 2px solid var(--magenta); outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.wrap {
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.eyebrow { font: 700 .78rem/1.2 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--magenta); }
+h2 { font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.05; }
+.section { padding-block: clamp(56px, 9vw, 112px); }
+.section-tint { background: var(--blush); }
+.section-head { display: grid; gap: 14px; max-width: 46rem; }
+.section-lead { color: var(--muted); font-size: clamp(1.05rem, 1.8vw, 1.18rem); max-width: 60ch; }
+
+/* Barra superior */
+.topbar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9;
+  background: var(--paper);
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-in { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 58px; }
+.brand { min-width: 0; font: italic 600 1.1rem/1.1 var(--display); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mini {
+  flex: none; display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px 6px 8px;
+  border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  text-decoration: none; font: 600 .9rem/1 var(--body); font-variant-numeric: tabular-nums;
+}
+.mini:hover { border-color: var(--magenta); color: var(--ink); }
+.lily-mini { width: 24px; height: 24px; display: block; }
+.lily-mini .mp { fill: transparent; stroke: var(--petal-edge); stroke-width: 10; transition: fill .4s, stroke .4s; }
+.lily-mini .mp.open { fill: var(--magenta); stroke: var(--magenta); }
+.lily-mini .mc { fill: var(--pollen); }
+
+/* Portada */
+.hero { overflow-x: clip; padding-block: clamp(28px, 6vw, 72px) clamp(56px, 8vw, 104px); }
+.hero-grid { display: grid; gap: clamp(36px, 6vw, 72px); align-items: center; }
+@media (min-width: 900px) { .hero-grid { grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); } }
+.hero-copy { display: grid; gap: 22px; justify-items: start; min-width: 0; }
+.hand-note { display: grid; gap: 2px; font: 700 clamp(1.6rem, 3.6vw, 2rem)/1 var(--hand); color: var(--magenta); }
+.hand-note svg { width: 96px; height: 10px; }
+.hand-note path { fill: none; stroke: var(--magenta); stroke-width: 2; stroke-linecap: round; }
+h1 { font-size: clamp(2.8rem, 8.5vw, 5.4rem); line-height: .98; }
+h1 em { font-style: italic; font-weight: 500; color: var(--magenta); }
+.lead { font-size: clamp(1.08rem, 2.2vw, 1.28rem); color: var(--muted); max-width: 38ch; }
+.trio { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 1.02rem; color: var(--muted); }
+.trio li { display: inline-flex; align-items: baseline; gap: 14px; }
+.trio li + li::before { content: "→"; color: var(--magenta); font-family: var(--display); }
+.trio b { color: var(--ink); font-weight: 700; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px;
+  border-radius: 999px; border: 1.5px solid transparent; font: 650 1rem/1 var(--body); text-decoration: none;
+  cursor: pointer; transition: background-color .2s, border-color .2s, color .2s;
+}
+.btn svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.btn-primary { background: var(--magenta); color: var(--on-accent); }
+.btn-primary:hover { background: var(--magenta-deep); color: var(--on-accent); }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn-ghost:hover { color: var(--magenta); border-color: var(--magenta); }
+.btn-sm { min-height: 42px; padding: 0 16px; font-size: .92rem; }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; max-width: 30rem; border-top: 1px solid var(--line); padding-top: 16px; }
+.facts div { display: grid; gap: 4px; align-content: start; padding-right: 12px; }
+.facts div + div { padding-left: 14px; border-left: 1px solid var(--line); }
+.facts dt { font: 700 .72rem/1.2 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.facts dd { font: 600 clamp(1.05rem, 2.6vw, 1.3rem)/1.2 var(--display); }
+
+.hero-art { position: relative; width: 100%; max-width: 520px; justify-self: center; padding: clamp(88px, 12vw, 96px) clamp(30px, 7vw, 52px) 0 0; }
+.lily-hero {
+  position: absolute; top: 0; right: 4%; z-index: 2; width: clamp(128px, 30vw, 196px); height: auto;
+  transform: rotate(-14deg); filter: drop-shadow(0 10px 16px var(--petal-shadow));
+}
+.stem-line { fill: none; stroke: var(--stem); stroke-width: 4; stroke-linecap: round; }
+.leaf { fill: var(--stem); }
+.mock { position: relative; z-index: 1; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); overflow: hidden; }
+.mock-bar { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: var(--paper); border-bottom: 1px solid var(--line); }
+.mock-dots { display: flex; gap: 6px; flex: none; }
+.mock-dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
+.mock-url { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 500 .76rem/1 var(--mono); color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 7px 12px; }
+.mock-body { display: grid; gap: 16px; padding: 22px 20px 20px; }
+.mock-id { display: flex; align-items: center; gap: 14px; }
+.mock-avatar { flex: none; width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; background: var(--magenta); color: var(--on-accent); font: italic 600 1.7rem/1 var(--display); box-shadow: 0 0 0 4px var(--surface), 0 0 0 5px var(--line); }
+.mock-name { display: block; font: 600 1.45rem/1.1 var(--display); }
+.mock-role { display: block; font-size: .82rem; color: var(--muted); }
+.mock-lines { display: grid; gap: 8px; }
+.mock-lines span { display: block; height: 8px; border-radius: 4px; background: var(--blush); }
+.mock-lines span:nth-child(1) { width: 94%; }
+.mock-lines span:nth-child(2) { width: 80%; }
+.mock-lines span:nth-child(3) { width: 58%; }
+.mock-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.mock-card { display: grid; gap: 8px; padding: 8px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); font: 600 .72rem/1.2 var(--body); color: var(--ink); min-width: 0; }
+.mock-card i { display: block; height: 40px; border-radius: 6px; background: var(--blush); }
+.mock-card:nth-child(1) i { background: linear-gradient(135deg, var(--blush), var(--petal-mid)); }
+.mock-card:nth-child(2) i { background: linear-gradient(135deg, var(--blush), var(--stem-soft)); }
+
+/* Qué vas a crear */
+.create { border-top: 1px solid var(--line); }
+.modes { display: grid; gap: 16px; margin-top: clamp(28px, 4vw, 44px); }
+@media (min-width: 760px) { .modes { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; } }
+.mode-card {
+  position: relative; display: grid; gap: 12px; align-content: start; padding: clamp(18px, 3vw, 24px);
+  border-radius: 20px; border: 1.5px solid var(--line); background: var(--surface); cursor: pointer;
+  transition: border-color .2s, box-shadow .2s;
+}
+.mode-card:hover { border-color: var(--petal-edge); }
+.mode-card input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.mode-card.is-selected { border-color: var(--magenta); box-shadow: 0 0 0 3px color-mix(in srgb, var(--magenta) 14%, transparent); }
+.mode-card:focus-within { outline: 2px solid var(--magenta); outline-offset: 3px; }
+.mode-badge { position: absolute; top: 14px; right: 14px; z-index: 1; padding: 6px 10px; border-radius: 999px; background: var(--magenta); color: var(--on-accent); font: 700 .72rem/1 var(--body); letter-spacing: .04em; opacity: 0; transition: opacity .2s; }
+.mode-card.is-selected .mode-badge { opacity: 1; }
+.mode-card h3 { font-size: clamp(1.5rem, 3vw, 1.85rem); line-height: 1.1; }
+.mode-card p { color: var(--muted); }
+.mode-card .mode-use { color: var(--ink); font-size: .95rem; }
+.mode-link { font: 500 .86rem/1.3 var(--mono); color: var(--magenta-deep); overflow-wrap: anywhere; }
+.thumb { display: grid; gap: 8px; align-content: start; height: 132px; padding: 0 14px 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--paper); overflow: hidden; }
+.t-bar { display: block; height: 18px; margin: 0 -14px 2px; background: var(--blush); border-bottom: 1px solid var(--line); }
+.t-row { display: flex; align-items: center; gap: 10px; }
+.t-avatar { flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--magenta); }
+.t-lines { display: grid; gap: 6px; flex: 1; }
+.t-line { display: block; height: 6px; border-radius: 3px; background: var(--line); }
+.t-w70 { width: 70%; } .t-w50 { width: 50%; } .t-w60 { width: 60%; } .t-w40 { width: 40%; }
+.t-cards, .t-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.t-cards i { display: block; height: 30px; border-radius: 5px; background: var(--blush); border: 1px solid var(--line); }
+.t-banner { display: grid; gap: 6px; align-content: center; height: 48px; padding: 0 12px; border-radius: 8px; background: linear-gradient(135deg, var(--magenta), var(--petal-mid)); }
+.t-banner .t-line { background: color-mix(in srgb, var(--on-accent) 75%, transparent); }
+.t-stats i { position: relative; display: block; height: 34px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); }
+.t-stats i::after { content: ""; position: absolute; left: 8px; top: 10px; width: 48%; height: 10px; border-radius: 3px; background: var(--stem-soft); }
+.many { margin-top: clamp(20px, 3vw, 28px); display: grid; gap: 18px; padding: clamp(18px, 3vw, 28px); border-radius: 20px; background: var(--blush); }
+@media (min-width: 860px) { .many { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 40px; align-items: center; } }
+.many-copy { display: grid; gap: 8px; }
+.many h3 { font-size: 1.5rem; line-height: 1.15; }
+.many-copy p { color: var(--muted); }
+.many-scroll { overflow-x: auto; min-width: 0; }
+.many-table { width: 100%; border-collapse: collapse; font-size: .86rem; }
+.many-table th { text-align: left; padding: 0 12px 10px 0; font: 700 .72rem/1.2 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.many-table td { padding: 10px 12px 10px 0; border-top: 1px solid var(--line); vertical-align: top; }
+.many-table td:first-child { white-space: nowrap; }
+.many-table td:first-child code { color: var(--ink); }
+
+/* Herramientas */
+.tools { list-style: none; padding: 0; margin-top: clamp(32px, 5vw, 56px); display: grid; gap: 64px; }
+@media (min-width: 880px) { .tools { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 64px; } }
+.tool { position: relative; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.tool-top { display: flex; align-items: center; gap: 12px; }
+.tool-icon { flex: none; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--line); color: var(--magenta); }
+.tool-icon svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.tool-role { font: 700 .78rem/1.2 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--magenta); }
+.tool h3 { font-size: clamp(2.1rem, 4vw, 2.6rem); line-height: 1; }
+.tool p { color: var(--muted); }
+.tool .tool-do { color: var(--ink); }
+.tool-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding-top: 4px; }
+.tool-link { font: 500 .92rem/1 var(--mono); }
+.badge { font: 700 .74rem/1 var(--body); letter-spacing: .03em; color: var(--stem); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; }
+.tool:not(:last-child)::after { content: "↓"; position: absolute; left: 14px; bottom: -48px; font: 400 1.8rem/1 var(--display); color: var(--magenta); }
+@media (min-width: 880px) { .tool:not(:last-child)::after { content: "→"; left: auto; bottom: auto; right: -46px; top: 12px; } }
+.tools-note { margin-top: clamp(32px, 4vw, 48px); color: var(--muted); font-size: .98rem; max-width: 62ch; }
+
+/* Pasos */
+.steps-layout { display: grid; gap: 24px; margin-top: clamp(32px, 5vw, 56px); }
+@media (min-width: 980px) { .steps-layout { grid-template-columns: 280px minmax(0, 1fr); gap: 56px; align-items: start; } }
+.bloom { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 4px 18px; align-items: center; padding: 18px; border: 1px solid var(--line); border-radius: 20px; background: var(--surface); }
+.lily-progress { grid-row: span 2; width: 104px; height: 104px; overflow: visible; }
+.seg-wrap { grid-column: 1 / -1; display: grid; gap: 8px; width: 100%; margin-bottom: 10px; }
+.seg-label { font: 700 .72rem/1.2 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.seg { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 16px; background: var(--blush); }
+.seg-btn { min-height: 40px; padding: 6px 10px; border: 0; border-radius: 12px; background: transparent; color: var(--muted); font: 650 .88rem/1.15 var(--body); cursor: pointer; transition: background-color .2s, color .2s; }
+.seg-btn[aria-pressed="true"] { background: var(--surface); color: var(--magenta-deep); box-shadow: var(--shadow-sm); }
+@media (min-width: 980px) {
+  .bloom { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 82px); grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; padding: 22px 20px 26px; gap: 8px; }
+  .seg-wrap { text-align: left; }
+  .lily-progress { grid-row: auto; width: 188px; height: 188px; }
+}
+.bloom-count { font: 600 1.3rem/1.2 var(--display); font-variant-numeric: tabular-nums; align-self: end; }
+.bloom-count strong { font-size: 1.8rem; color: var(--magenta); }
+.bloom-msg { color: var(--muted); font-size: .98rem; align-self: start; }
+.bloom-msg.done { color: var(--magenta-deep); font-weight: 700; }
+.lily-progress .ghost { fill: transparent; stroke: var(--petal-edge); stroke-width: 1.5; stroke-dasharray: 4 5; transition: opacity .3s; }
+.lily-progress .bloom-petal { opacity: 0; transform: scale(.3); transition: opacity .35s ease, transform .75s cubic-bezier(.2, .9, .25, 1.15); }
+.lily-progress .petal.open .bloom-petal { opacity: 1; transform: scale(1); }
+.lily-progress .petal.open .ghost { opacity: 0; }
+.lily-progress.full { animation: bloom-pulse 1.4s ease-out 1; }
+@keyframes bloom-pulse { 0% { transform: scale(1) rotate(0); } 35% { transform: scale(1.08) rotate(5deg); } 100% { transform: scale(1) rotate(0); } }
+
+.steps { list-style: none; padding: 0; display: grid; gap: 18px; min-width: 0; }
+.step { display: grid; gap: 20px; padding: clamp(20px, 3.6vw, 32px); background: var(--surface); border: 1px solid var(--line); border-radius: 20px; min-width: 0; transition: border-color .3s, box-shadow .3s; }
+.step.is-done { border-color: var(--petal-edge); box-shadow: 0 0 0 3px color-mix(in srgb, var(--magenta) 10%, transparent); }
+.step-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px; align-items: center; }
+.step-num { font: italic 500 clamp(2.7rem, 6vw, 3.3rem)/.8 var(--display); color: var(--magenta); min-width: .8em; text-align: center; }
+.step h3 { font-size: clamp(1.45rem, 3vw, 1.85rem); line-height: 1.1; }
+.step-time { display: inline-flex; align-items: center; gap: 7px; margin-top: 6px; font-size: .86rem; color: var(--muted); }
+.step-time::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--pollen); }
+.step-body, .mode-block { display: grid; gap: 16px; min-width: 0; }
+.step-body p { max-width: 64ch; }
+.sub-title { font-weight: 700; }
+.sub { padding-left: 1.5em; display: grid; gap: 10px; }
+.sub li { padding-left: 4px; }
+.sub li::marker { color: var(--magenta); font-weight: 700; }
+.content-list { list-style: none; padding: 0; display: grid; border-top: 1px solid var(--line); }
+.content-list li { display: grid; gap: 2px; padding-block: 12px; border-bottom: 1px solid var(--line); }
+@media (min-width: 640px) { .content-list li { grid-template-columns: 11.5rem minmax(0, 1fr); gap: 16px; } }
+.content-list b { font-weight: 700; }
+.content-list span { color: var(--muted); }
+.files { list-style: none; padding: 14px 16px; display: grid; gap: 10px; border-radius: 14px; border: 1.5px dashed var(--petal-edge); }
+.files li { display: grid; gap: 2px; }
+@media (min-width: 560px) { .files li { grid-template-columns: 9.5rem minmax(0, 1fr); gap: 12px; align-items: baseline; } }
+.files span { color: var(--muted); }
+.ui { font: 500 .84em/1.3 var(--mono); padding: 1px 7px; border-radius: 6px; background: var(--blush); border: 1px solid var(--line); color: var(--ink); white-space: nowrap; }
+code { font: 500 .9em/1.3 var(--mono); color: var(--magenta-deep); overflow-wrap: anywhere; }
+kbd { font: 500 .82em/1 var(--mono); padding: 2px 6px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 6px; background: var(--surface); color: var(--ink); }
+.tip { display: grid; gap: 4px; padding: 14px 16px; border-radius: 14px; background: var(--blush); }
+.tip-title { font: 700 .78rem/1.3 var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--magenta-deep); }
+.tip-win { background: color-mix(in srgb, var(--stem) 14%, var(--surface)); }
+.tip-win .tip-title { color: var(--stem); }
+.note { font-size: .94rem; color: var(--muted); }
+.check { display: flex; align-items: flex-start; gap: 10px; padding-top: 14px; border-top: 1px dashed var(--line); }
+.check svg { flex: none; width: 18px; height: 18px; margin-top: 4px; fill: none; stroke: var(--stem); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.check b { color: var(--stem); }
+
+.done-btn {
+  justify-self: start; display: inline-flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 18px 0 11px;
+  border-radius: 999px; border: 1.5px solid var(--line); background: transparent; color: var(--ink);
+  font: 650 .95rem/1 var(--body); cursor: pointer; transition: border-color .2s, color .2s, background-color .2s;
+}
+.done-btn:hover { border-color: var(--magenta); }
+.done-box { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--muted); display: grid; place-items: center; transition: background-color .2s, border-color .2s; }
+.done-box svg { width: 14px; height: 14px; fill: none; stroke: var(--on-accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; opacity: 0; transition: opacity .2s; }
+.step.is-done .done-btn { border-color: var(--magenta); color: var(--magenta-deep); background: color-mix(in srgb, var(--magenta) 8%, transparent); }
+.step.is-done .done-box { background: var(--magenta); border-color: var(--magenta); }
+.step.is-done .done-box svg { opacity: 1; }
+
+/* Generador del mensaje */
+.builder { display: grid; gap: 20px; padding: clamp(14px, 3vw, 22px); border-radius: 18px; background: var(--paper); border: 1px solid var(--line); min-width: 0; }
+.form-grid { display: grid; gap: 16px; }
+@media (min-width: 640px) { .form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.form-grid > .mode-block { grid-column: 1 / -1; display: grid; gap: 16px; }
+@media (min-width: 640px) { .form-grid > .mode-block { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.field { min-width: 0; margin: 0; padding: 0; border: 0; }
+div.field { display: grid; gap: 6px; align-content: start; }
+.field-wide { grid-column: 1 / -1; }
+.field > label, .field > legend { font: 700 .74rem/1.2 var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding: 0; }
+.field > legend { margin-bottom: 8px; }
+.field input[type="text"] {
+  width: 100%; min-height: 46px; padding: 10px 14px; border-radius: 12px; border: 1.5px solid var(--line);
+  background: var(--surface); color: var(--ink); font: 400 1rem/1.3 var(--body);
+}
+.field input[type="text"]::placeholder { color: var(--muted); opacity: .8; }
+.field input[type="text"]:focus { outline: none; border-color: var(--magenta); box-shadow: 0 0 0 3px color-mix(in srgb, var(--magenta) 20%, transparent); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { position: relative; display: inline-flex; }
+.chip input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.chip span {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px; border-radius: 999px;
+  border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); font: 600 .9rem/1 var(--body);
+  transition: background-color .2s, border-color .2s, color .2s;
+}
+.chip input:checked + span { border-color: var(--magenta); background: color-mix(in srgb, var(--magenta) 12%, var(--surface)); color: var(--magenta-deep); }
+.chip input[type="checkbox"]:checked + span::before { content: "✓"; font-size: .85rem; }
+.chip input:focus-visible + span { outline: 2px solid var(--magenta); outline-offset: 2px; }
+.swatch { flex: none; width: 16px; height: 16px; border-radius: 50%; border: 1px solid var(--line); background: linear-gradient(135deg, var(--sa) 0 50%, var(--sb) 50% 100%); }
+.out { display: grid; gap: 10px; min-width: 0; }
+.out-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+.out-label { font: 700 .74rem/1.2 var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.prompt {
+  margin: 0; padding: 16px; border-radius: 14px; border: 1.5px dashed var(--petal-edge); background: var(--surface); color: var(--ink);
+  font: 400 .86rem/1.6 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; max-height: 24rem; overflow: auto;
+}
+.copy-status { min-height: 1.4em; font-size: .92rem; font-weight: 600; color: var(--stem); }
+.examples { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.ex {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 14px; border-radius: 12px;
+  border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); font: 500 .9rem/1.3 var(--body);
+  text-align: left; cursor: pointer; transition: border-color .2s, color .2s;
+}
+.ex svg { width: 15px; height: 15px; flex: none; fill: none; stroke: var(--magenta); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ex:hover { border-color: var(--magenta); }
+.ex .i-check { display: none; }
+.ex.copied { border-color: var(--stem); color: var(--stem); }
+.ex.copied svg { stroke: var(--stem); }
+.ex.copied .i-check { display: block; }
+.ex.copied .i-copy { display: none; }
+.copy-line { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 10px; }
+.copy-line code { flex: 1 1 15rem; min-width: 0; padding: 10px 14px; border-radius: 12px; background: var(--paper); border: 1px solid var(--line); color: var(--ink); font-size: .86rem; line-height: 1.5; }
+.js-copy.copied { border-color: var(--stem); color: var(--stem); }
+
+/* Diccionario */
+.glossary { display: grid; grid-template-columns: minmax(0, 1fr); column-gap: 32px; margin-top: clamp(28px, 4vw, 48px); border-top: 1px solid var(--line); }
+@media (min-width: 620px) { .glossary { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1000px) { .glossary { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.glossary div { display: grid; gap: 6px; align-content: start; padding-block: 18px 20px; border-bottom: 1px solid var(--line); }
+.glossary dt { font: 500 1rem/1.2 var(--mono); color: var(--magenta-deep); }
+.glossary dd { color: var(--muted); font-size: .98rem; }
+.glossary dd code { color: var(--ink); }
+
+/* Dudas */
+.faq-grid { display: grid; gap: 28px; }
+@media (min-width: 900px) { .faq-grid { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 72px; align-items: start; } }
+.faq { border-top: 1px solid var(--line); }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { list-style: none; cursor: pointer; position: relative; padding: 18px 44px 18px 0; font: 700 1.06rem/1.4 var(--body); }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; position: absolute; right: 6px; top: 50%; transform: translateY(-50%); font: 400 1.7rem/1 var(--display); color: var(--magenta); transition: transform .25s; }
+.faq details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+.faq details p { padding: 0 0 20px; color: var(--muted); max-width: 62ch; }
+
+/* Pie */
+.foot { background: var(--blush); padding-block: 32px 44px; color: var(--muted); font-size: .9rem; }
+.foot-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px; }
+.foot-sign { display: inline-flex; align-items: center; gap: 10px; font: 700 1.75rem/1 var(--hand); color: var(--magenta); }
+.foot-lily { flex: none; width: 42px; height: 42px; transform: rotate(-12deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="petalGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="-94">
+      <stop offset="0" style="stop-color: var(--magenta)"/>
+      <stop offset=".52" style="stop-color: var(--petal-mid)"/>
+      <stop offset="1" style="stop-color: var(--petal-tip)"/>
+    </linearGradient>
+    <path id="petalShape" d="M0 0C10 -10 21 -36 16 -60C12 -76 5 -86 0 -94C-5 -86 -12 -76 -16 -60C-21 -36 -10 -10 0 0Z"/>
+    <g id="petalFull">
+      <use href="#petalShape" style="fill: url(#petalGrad); stroke: var(--petal-edge); stroke-width: .8"/>
+      <path d="M0 -10Q1.5 -42 0 -80" style="fill: none; stroke: var(--petal-tip); stroke-width: 1.2; stroke-linecap: round; opacity: .7"/>
+      <g style="fill: var(--magenta-deep)">
+        <circle cx="-3.5" cy="-16" r="1.8"/>
+        <circle cx="3.5" cy="-21" r="1.6"/>
+        <circle cx="-2.5" cy="-28" r="1.5"/>
+        <circle cx="3" cy="-35" r="1.3"/>
+        <circle cx="-1.5" cy="-42" r="1.1"/>
+        <circle cx="2" cy="-49" r=".9"/>
+      </g>
+    </g>
+    <g id="lilyCenter">
+      <circle r="9" style="fill: var(--stem-soft)"/>
+      <g style="fill: none; stroke: var(--stem-soft); stroke-width: 1.6; stroke-linecap: round">
+        <path d="M0 -6Q7 -30 3 -52" transform="rotate(30)"/>
+        <path d="M0 -6Q7 -30 3 -52" transform="rotate(90)"/>
+        <path d="M0 -6Q7 -30 3 -52" transform="rotate(150)"/>
+        <path d="M0 -6Q7 -30 3 -52" transform="rotate(210)"/>
+        <path d="M0 -6Q7 -30 3 -52" transform="rotate(270)"/>
+        <path d="M0 -6Q7 -30 3 -52" transform="rotate(330)"/>
+      </g>
+      <g style="fill: var(--pollen)">
+        <ellipse cx="3" cy="-54" rx="6.5" ry="2.6" transform="rotate(30)"/>
+        <ellipse cx="3" cy="-54" rx="6.5" ry="2.6" transform="rotate(90)"/>
+        <ellipse cx="3" cy="-54" rx="6.5" ry="2.6" transform="rotate(150)"/>
+        <ellipse cx="3" cy="-54" rx="6.5" ry="2.6" transform="rotate(210)"/>
+        <ellipse cx="3" cy="-54" rx="6.5" ry="2.6" transform="rotate(270)"/>
+        <ellipse cx="3" cy="-54" rx="6.5" ry="2.6" transform="rotate(330)"/>
+      </g>
+    </g>
+    <g id="lilyBloom">
+      <use href="#petalFull" transform="rotate(60) scale(.9 .94)"/>
+      <use href="#petalFull" transform="rotate(180) scale(.9 .94)"/>
+      <use href="#petalFull" transform="rotate(300) scale(.9 .94)"/>
+      <use href="#petalFull"/>
+      <use href="#petalFull" transform="rotate(120)"/>
+      <use href="#petalFull" transform="rotate(240)"/>
+      <use href="#lilyCenter"/>
+    </g>
+    <symbol id="iconCopy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></symbol>
+    <symbol id="iconCheck" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol>
+  </defs>
+</svg>
+
+<div class="topbar">
+  <div class="wrap topbar-in">
+    <p class="brand">El portafolio de Lily</p>
+    <a class="mini" id="miniProgress" href="#pasos" aria-label="Llevas 0 de 6 pasos. Ir a los pasos">
+      <svg class="lily-mini" viewBox="-100 -100 200 200" aria-hidden="true" focusable="false">
+        <ellipse class="mp" data-i="0" cx="0" cy="-50" rx="19" ry="42"/>
+        <ellipse class="mp" data-i="1" cx="0" cy="-50" rx="19" ry="42" transform="rotate(60)"/>
+        <ellipse class="mp" data-i="2" cx="0" cy="-50" rx="19" ry="42" transform="rotate(120)"/>
+        <ellipse class="mp" data-i="3" cx="0" cy="-50" rx="19" ry="42" transform="rotate(180)"/>
+        <ellipse class="mp" data-i="4" cx="0" cy="-50" rx="19" ry="42" transform="rotate(240)"/>
+        <ellipse class="mp" data-i="5" cx="0" cy="-50" rx="19" ry="42" transform="rotate(300)"/>
+        <circle class="mc" r="15"/>
+      </svg>
+      <span id="miniCount">0/6</span>
+    </a>
+  </div>
+</div>
+
+<header class="hero" id="inicio">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="hand-note">Para Lily
+        <svg viewBox="0 0 96 10" aria-hidden="true" focusable="false"><path d="M2 6C14 1 24 9 36 5S60 2 72 6S88 4 94 5"/></svg>
+      </p>
+      <h1>Tu propia web, <em>en una tarde.</em></h1>
+      <p class="lead">Te armé esta guía para que crees tu portafolio, o la web de un trabajo, y la publiques con tu propio link. No necesitas saber programar y no vas a pagar nada.</p>
+      <ol class="trio" aria-label="Cómo se hace">
+        <li><span><b>Claude</b> la diseña</span></li>
+        <li><span><b>GitHub</b> la guarda</span></li>
+        <li><span><b>Vercel</b> la publica</span></li>
+      </ol>
+      <div class="actions">
+        <a class="btn btn-primary" href="#que-crear">Empezar la guía</a>
+        <a class="btn btn-ghost" href="#herramientas">Conocer las herramientas</a>
+      </div>
+      <dl class="facts">
+        <div><dt>Tiempo</dt><dd>1 a 2 horas</dd></div>
+        <div><dt>Costo</dt><dd>S/&nbsp;0</dd></div>
+        <div><dt>Necesitas</dt><dd>Laptop y correo</dd></div>
+      </dl>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg class="lily-hero" viewBox="-110 -110 220 220" focusable="false">
+        <path class="stem-line" d="M2 14C6 46 16 76 34 108"/>
+        <path class="leaf" d="M17 74C40 60 66 66 86 92C60 94 36 90 17 74Z"/>
+        <use href="#lilyBloom"/>
+      </svg>
+      <div class="mock">
+        <div class="mock-bar"><span class="mock-dots"><i></i><i></i><i></i></span><span class="mock-url">lily-portafolio.vercel.app</span></div>
+        <div class="mock-body">
+          <div class="mock-id">
+            <span class="mock-avatar">L</span>
+            <span><span class="mock-name">Lily</span><span class="mock-role">Estudiante · Lima, Perú</span></span>
+          </div>
+          <div class="mock-lines"><span></span><span></span><span></span></div>
+          <div class="mock-cards">
+            <span class="mock-card"><i></i>Proyectos</span>
+            <span class="mock-card"><i></i>MUN</span>
+            <span class="mock-card"><i></i>Contacto</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="section create" id="que-crear">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Para empezar</p>
+        <h2>¿Qué vas a crear?</h2>
+        <p class="section-lead">Con estas herramientas puedes hacer cualquier web de una sola página. Elige una opción y la guía se adapta. Cambian los ejemplos, el mensaje para Claude y los nombres que vas a usar.</p>
+      </div>
+      <div class="modes" role="radiogroup" aria-label="Qué vas a crear">
+        <label class="mode-card is-selected" for="modo-personal">
+          <input type="radio" name="modo" id="modo-personal" value="personal" checked>
+          <span class="mode-badge" aria-hidden="true">Elegida</span>
+          <span class="thumb" aria-hidden="true">
+            <span class="t-bar"></span>
+            <span class="t-row"><span class="t-avatar"></span><span class="t-lines"><span class="t-line t-w70"></span><span class="t-line t-w50"></span></span></span>
+            <span class="t-cards"><i></i><i></i><i></i></span>
+          </span>
+          <h3>Mi portafolio</h3>
+          <p>Una web sobre ti. Cuenta quién eres, qué estudias, tus proyectos y cómo contactarte.</p>
+          <p class="mode-use">Sirve para tu CV, LinkedIn e Instagram, y cuando postules a prácticas o intercambios.</p>
+          <span class="mode-link">lily-portafolio.vercel.app</span>
+        </label>
+        <label class="mode-card" for="modo-proyecto">
+          <input type="radio" name="modo" id="modo-proyecto" value="proyecto">
+          <span class="mode-badge" aria-hidden="true">Elegida</span>
+          <span class="thumb" aria-hidden="true">
+            <span class="t-bar"></span>
+            <span class="t-banner"><span class="t-line t-w60"></span><span class="t-line t-w40"></span></span>
+            <span class="t-stats"><i></i><i></i><i></i></span>
+          </span>
+          <h3>La web de un trabajo</h3>
+          <p>Una web para un solo trabajo o proyecto. Puede ser un trabajo de la universidad, un plan de negocio, un evento, un emprendimiento o tu comité del MUN.</p>
+          <p class="mode-use">Sirve para presentarlo en clase, mandárselo a tu profesor o mostrarlo en un concurso o a un cliente.</p>
+          <span class="mode-link">plan-cafeteria.vercel.app</span>
+        </label>
+      </div>
+      <div class="many">
+        <div class="many-copy">
+          <h3>Una web por cada cosa</h3>
+          <p>Cada web tiene su propio repositorio en GitHub, su propio proyecto en Vercel y su propio link. Puedes tener todas las que quieras y después juntarlas en tu portafolio.</p>
+        </div>
+        <div class="many-scroll">
+          <table class="many-table">
+            <thead><tr><th scope="col">En GitHub</th><th scope="col">Tu link en internet</th></tr></thead>
+            <tbody>
+              <tr><td><code>portafolio</code></td><td><code>lily-portafolio.vercel.app</code></td></tr>
+              <tr><td><code>plan-cafeteria</code></td><td><code>plan-cafeteria.vercel.app</code></td></tr>
+              <tr><td><code>mun-2027</code></td><td><code>mun-2027-lily.vercel.app</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint" id="herramientas">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Las herramientas</p>
+        <h2>Taller, almacén y vitrina</h2>
+        <p class="section-lead">Piensa en un negocio. Lo que vende se hace en un taller, se guarda en un almacén y se muestra en una vitrina. Tu web sigue el mismo camino, con una herramienta para cada parte.</p>
+      </div>
+      <ol class="tools">
+        <li class="tool">
+          <div class="tool-top">
+            <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.6 7.6"/><circle cx="11" cy="11" r="2"/></svg></span>
+            <p class="tool-role">El taller</p>
+          </div>
+          <h3>Claude</h3>
+          <p>Es una inteligencia artificial con la que conversas como en un chat. Le describes tu web con tus palabras y Claude escribe el código, te muestra cómo se ve y la cambia cuando se lo pides.</p>
+          <p class="tool-do"><b>Ahí vas a</b> describir tu web, pedir cambios y copiar el código final.</p>
+          <p class="tool-meta"><a class="tool-link" href="https://claude.ai" target="_blank" rel="noopener">claude.ai ↗</a><span class="badge">Plan gratis</span></p>
+        </li>
+        <li class="tool">
+          <div class="tool-top">
+            <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/></svg></span>
+            <p class="tool-role">El almacén</p>
+          </div>
+          <h3>GitHub</h3>
+          <p>Es como un Google Drive para páginas web. Guarda los archivos de tu web en una carpeta llamada repositorio y recuerda cada cambio que hagas, así puedes volver atrás.</p>
+          <p class="tool-do"><b>Ahí vas a</b> crear el repositorio, pegar el código y subir tus fotos y archivos.</p>
+          <p class="tool-meta"><a class="tool-link" href="https://github.com" target="_blank" rel="noopener">github.com ↗</a><span class="badge">Gratis</span></p>
+        </li>
+        <li class="tool">
+          <div class="tool-top">
+            <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 9l1.6-5h14.8L21 9"/><path d="M3 9a3 3 0 0 0 6 0a3 3 0 0 0 6 0a3 3 0 0 0 6 0"/><path d="M5 11.6V20h14v-8.4"/><path d="M10 20v-5h4v5"/></svg></span>
+            <p class="tool-role">La vitrina</p>
+          </div>
+          <h3>Vercel</h3>
+          <p>Pone tu web en internet. Lee tu repositorio de GitHub, la publica con un link que termina en .vercel.app y la actualiza sola cada vez que guardas un cambio en GitHub.</p>
+          <p class="tool-do"><b>Ahí vas a</b> importar tu repositorio, elegir tu link y publicar.</p>
+          <p class="tool-meta"><a class="tool-link" href="https://vercel.com" target="_blank" rel="noopener">vercel.com ↗</a><span class="badge">Plan Hobby gratis</span></p>
+        </li>
+      </ol>
+      <p class="tools-note">Las tres tienen plan gratis. El de Vercel se llama Hobby y es para proyectos personales y de estudio, como tu portafolio o tus trabajos.</p>
+    </div>
+  </section>
+
+  <section class="section" id="pasos">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Paso a paso</p>
+        <h2>Seis pasos, seis pétalos</h2>
+        <p class="section-lead">Un lirio tiene seis pétalos y esta guía tiene seis pasos. Cuando termines uno, márcalo como hecho y se abre un pétalo. Cada web que hagas tiene su propio lirio.</p>
+      </div>
+      <div class="steps-layout">
+        <aside class="bloom" aria-label="Tu progreso">
+          <div class="seg-wrap">
+            <p class="seg-label" id="segLabel">Estás creando</p>
+            <div class="seg" role="group" aria-labelledby="segLabel">
+              <button class="seg-btn" type="button" data-set-mode="personal" aria-pressed="true">Mi portafolio</button>
+              <button class="seg-btn" type="button" data-set-mode="proyecto" aria-pressed="false">Web de un trabajo</button>
+            </div>
+          </div>
+          <svg class="lily-progress" id="lilyProgress" viewBox="-110 -110 220 220" aria-hidden="true" focusable="false">
+            <g class="petal" data-i="1" transform="rotate(60) scale(.9 .94)"><use href="#petalShape" class="ghost"/><use href="#petalFull" class="bloom-petal"/></g>
+            <g class="petal" data-i="3" transform="rotate(180) scale(.9 .94)"><use href="#petalShape" class="ghost"/><use href="#petalFull" class="bloom-petal"/></g>
+            <g class="petal" data-i="5" transform="rotate(300) scale(.9 .94)"><use href="#petalShape" class="ghost"/><use href="#petalFull" class="bloom-petal"/></g>
+            <g class="petal" data-i="0"><use href="#petalShape" class="ghost"/><use href="#petalFull" class="bloom-petal"/></g>
+            <g class="petal" data-i="2" transform="rotate(120)"><use href="#petalShape" class="ghost"/><use href="#petalFull" class="bloom-petal"/></g>
+            <g class="petal" data-i="4" transform="rotate(240)"><use href="#petalShape" class="ghost"/><use href="#petalFull" class="bloom-petal"/></g>
+            <use href="#lilyCenter"/>
+          </svg>
+          <p class="bloom-count"><strong id="bloomCount">0</strong> de 6 pétalos</p>
+          <p class="bloom-msg" id="bloomMsg" aria-live="polite">Empieza por el paso 1.</p>
+        </aside>
+
+        <ol class="steps">
+          <li class="step" id="paso-1">
+            <div class="step-head">
+              <span class="step-num" aria-hidden="true">1</span>
+              <div><h3 id="t1">Junta tu contenido</h3><p class="step-time">20 a 40 minutos</p></div>
+            </div>
+            <div class="step-body">
+              <div class="mode-block" data-mode-only="personal">
+                <p>Antes de diseñar, junta lo que quieres contar en un solo documento o en las notas de tu celular. No necesitas experiencia laboral. Un buen trabajo de un curso ya cuenta como proyecto.</p>
+                <ul class="content-list">
+                  <li><b>Tu nombre y una frase</b><span>Algo como «Me encanta organizar proyectos y conocer otras culturas».</span></li>
+                  <li><b>Sobre ti</b><span>Tres o cuatro líneas sobre qué estudias, qué te gusta y qué buscas, como prácticas, voluntariados o un intercambio.</span></li>
+                  <li><b>Estudios</b><span>Tu carrera, tu universidad y tu ciclo.</span></li>
+                  <li><b>Dos o tres proyectos</b><span>Para cada uno, un título, dos líneas sobre lo que hiciste tú y una imagen. Pueden ser trabajos de cursos, el MUN, un voluntariado o un evento.</span></li>
+                  <li><b>Habilidades</b><span>Por ejemplo Excel, Canva, hablar en público o trabajo en equipo.</span></li>
+                  <li><b>Idiomas</b><span>Español, inglés y tu nivel en cada uno.</span></li>
+                  <li><b>Contacto</b><span>Tu correo y tu LinkedIn.</span></li>
+                </ul>
+                <p class="sub-title">Tus archivos, con estos nombres</p>
+                <ul class="files">
+                  <li><code>foto.jpg</code><span>Una foto tuya de frente, con buena luz.</span></li>
+                  <li><code>cv.pdf</code><span>Tu CV, si quieres que lo puedan descargar.</span></li>
+                </ul>
+                <div class="tip"><p class="tip-title">Cuida tus datos</p><p>Tu web la puede ver cualquier persona. No pongas tu DNI, tu dirección ni tu número de celular. Con tu correo y tu LinkedIn basta.</p></div>
+              </div>
+              <div class="mode-block" data-mode-only="proyecto" hidden>
+                <p>Junta lo que ya tienes del trabajo, como el informe, la presentación, fotos y datos. Puedes copiar textos de tu Word o PPT. Si son muy largos, pégalos en Claude y pídele que los resuma en secciones.</p>
+                <ul class="content-list">
+                  <li><b>Nombre del trabajo</b><span>Por ejemplo «Plan de negocio: Café Origen».</span></li>
+                  <li><b>Contexto</b><span>El curso, el profesor y la fecha, o el concurso o evento.</span></li>
+                  <li><b>De qué trata</b><span>Una o dos frases que lo expliquen a alguien que no sabe nada del tema.</span></li>
+                  <li><b>Problema u oportunidad</b><span>Qué necesidad encontraron y por qué importa.</span></li>
+                  <li><b>Propuesta</b><span>Qué plantean hacer y cómo.</span></li>
+                  <li><b>Análisis y resultados</b><span>Datos, encuestas, gráficos y conclusiones. Los gráficos súbelos como imagen.</span></li>
+                  <li><b>Equipo</b><span>Los nombres de los integrantes y qué hizo cada uno.</span></li>
+                </ul>
+                <p class="sub-title">Tus archivos, con estos nombres</p>
+                <ul class="files">
+                  <li><code>logo.png</code><span>El logo del proyecto o una imagen principal.</span></li>
+                  <li><code>foto-1.jpg</code>, <code>foto-2.jpg</code>…<span>Fotos, capturas o gráficos.</span></li>
+                  <li><code>informe.pdf</code><span>El informe completo, si quieres que lo puedan descargar.</span></li>
+                </ul>
+                <div class="tip"><p class="tip-title">Cuida los datos</p><p>Tu web la puede ver cualquier persona. Pide permiso a tu equipo antes de poner sus nombres y fotos, y no publiques datos privados de las personas que encuestaron.</p></div>
+              </div>
+              <div class="tip"><p class="tip-title">Nombra bien tus archivos</p><p>Todo en minúsculas, sin espacios, sin tildes ni ñ. Bien: <code>foto-1.jpg</code>. Mal: <code>Foto Año 1.JPG</code>. Usa fotos de menos de 1 MB para que tu web cargue rápido. Si pesan más, puedes reducirlas en squoosh.app.</p></div>
+              <p class="check"><svg aria-hidden="true" focusable="false"><use href="#iconCheck"/></svg><span><b>Listo cuando</b> tienes tus textos en un solo documento y tus archivos en una carpeta, con los nombres correctos.</span></p>
+            </div>
+            <button class="done-btn" type="button" aria-pressed="false" aria-describedby="t1"><span class="done-box"><svg aria-hidden="true" focusable="false"><use href="#iconCheck"/></svg></span><span class="done-label">Marcar como hecho</span></button>
+          </li>
+
+          <li class="step" id="paso-2">
+            <div class="step-head">
+              <span class="step-num" aria-hidden="true">2</span>
+              <div><h3 id="t2">Crea tus cuentas</h3><p class="step-time">10 minutos</p></div>
+            </div>
+            <div class="step-body">
+              <div class="tip tip-win" data-mode-only="proyecto" hidden><p class="tip-title">¿Ya tienes tus cuentas?</p><p>Si ya las creaste para tu portafolio, marca este paso como hecho y sigue con el paso 3.</p></div>
+              <p>Créalas en este orden y desde la computadora. Así GitHub y Vercel quedan conectados desde el inicio.</p>
+              <ol class="sub">
+                <li><b>GitHub.</b> Entra a <a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup</a>. Pon tu correo, una contraseña y un nombre de usuario. GitHub te manda un código a tu correo para confirmar la cuenta.</li>
+                <li><b>Vercel.</b> Entra a <a href="https://vercel.com/signup" target="_blank" rel="noopener">vercel.com/signup</a> y elige <span class="ui">Hobby</span>, el plan gratis. Escribe tu nombre y toca <span class="ui">Continue with GitHub</span>. En la ventana de GitHub que se abre, toca <span class="ui">Authorize Vercel</span>.</li>
+                <li><b>Claude.</b> Entra a <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> y toca <span class="ui">Continuar con Google</span>, o entra con tu correo. Puede que te pida un código que llega a tu celular. El plan gratis alcanza para todo esto.</li>
+              </ol>
+              <div class="tip"><p class="tip-title">Tu usuario de GitHub</p><p>Elige uno simple y profesional, como tu nombre y apellido juntos. Si GitHub te pide activar la verificación en dos pasos, actívala. Sirve para proteger tu cuenta.</p></div>
+              <p class="check"><svg aria-hidden="true" focusable="false"><use href="#iconCheck"/></svg><span><b>Listo cuando</b> entras a las tres páginas con tu cuenta y en Vercel ves tu panel, todavía vacío.</span></p>
+            </div>
+            <button class="done-btn" type="button" aria-pressed="false" aria-describedby="t2"><span class="done-box"><svg aria-hidden="true" focusable="false"><use href="#iconCheck"/></svg></span><span class="done-label">Marcar como hecho</span></button>
+          </li>
+
+          <li class="step" id="paso-3">
+            <div class="step-head">
+              <span class="step-num" aria-hidden="true">3</span>
+              <div><h3 id="t3">Pídele tu web a Claude</h3><p class="step-time">30 minutos</p></div>
+            </div>
+            <div class="step-body">
+              <p>Llena los datos y el mensaje para Claude se arma solo. Después lo copias y lo pegas en un chat nuevo.</p>
+              <div class="builder" id="builder">
+                <div class="form-grid">
+                  <div class="mode-block" data-mode-only="personal">
+                    <div class="field"><label for="f-nombre">Tu nombre</label><input id="f-nombre" type="text" value="Lily" autocomplete="off"></div>
+                    <div class="field"><label for="f-carrera">Tu carrera</label><input id="f-carrera" type="text" placeholder="Ej.: Administración de Empresas" autocomplete="off"></div>
+                    <div class="field"><label for="f-uni">Tu universidad</label><input id="f-uni" type="text" value="Universidad Científica del Sur" autocomplete="off"></div>
+                    <div class="field"><label for="f-frase">Una frase sobre ti</label><input id="f-frase" type="text" placeholder="Ej.: Me encanta organizar proyectos" autocomplete="off"></div>
+                    <fieldset class="field field-wide">
+                      <legend>Secciones</legend>
+                      <div class="chips">
+                        <label class="chip"><input type="checkbox" name="sec" id="sec-sobre" value="Sobre mí" checked><span>Sobre mí</span></label>
+                        <label class="chip"><input type="checkbox" name="sec" id="sec-estudios" value="Estudios" checked><span>Estudios</span></label>
+                        <label class="chip"><input type="checkbox" name="sec" id="sec-proyectos" value="Proyectos" checked><span>Proyectos</span></label>
+                        <label class="chip"><input type="checkbox" name="sec" id="sec-experiencia" value="Experiencia"><span>Experiencia</span></label>
+                        <label class="chip"><input type="checkbox" name="sec" id="sec-habilidades" value="Habilidades" checked><span>Habilidades</span></label>
+                        <label class="chip"><input type="checkbox" name="sec" id="sec-idiomas" value="Idiomas" checked><span>Idiomas</span></label>
+                        <label class="chip"><input type="checkbox" name="sec" id="sec-contacto" value="Contacto" checked><span>Contacto</span></label>
+                      </div>
+                    </fieldset>
+                    <fieldset class="field field-wide">
+                      <legend>Extras</legend>
+                      <div class="chips">
+                        <label class="chip"><input type="checkbox" id="x-foto" checked><span>Mi foto</span></label>
+                        <label class="chip"><input type="checkbox" id="x-cv"><span>Botón para mi CV</span></label>
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="mode-block" data-mode-only="proyecto" hidden>
+                    <div class="field"><label for="p-nombre">Nombre del trabajo</label><input id="p-nombre" type="text" placeholder="Ej.: Plan de negocio: Café Origen" autocomplete="off"></div>
+                    <div class="field"><label for="p-contexto">Curso o contexto</label><input id="p-contexto" type="text" placeholder="Ej.: Fundamentos de la Administración" autocomplete="off"></div>
+                    <div class="field"><label for="p-resumen">De qué trata, en una frase</label><input id="p-resumen" type="text" placeholder="Ej.: Una cafetería para estudiantes en Barranco" autocomplete="off"></div>
+                    <div class="field"><label for="p-equipo">Integrantes</label><input id="p-equipo" type="text" placeholder="Ej.: Lily, Ana y Diego" autocomplete="off"></div>
+                    <fieldset class="field field-wide">
+                      <legend>¿Quién la va a ver?</legend>
+                      <div class="chips">
+                        <label class="chip"><input type="radio" name="publico" id="pub-profesor" value="profesor" checked><span>Profesor y compañeros</span></label>
+                        <label class="chip"><input type="radio" name="publico" id="pub-jurado" value="jurado"><span>Jurado</span></label>
+                        <label class="chip"><input type="radio" name="publico" id="pub-clientes" value="clientes"><span>Clientes</span></label>
+                        <label class="chip"><input type="radio" name="publico" id="pub-general" value="general"><span>Público en general</span></label>
+                      </div>
+                    </fieldset>
+                    <fieldset class="field field-wide">
+                      <legend>Secciones</legend>
+                      <div class="chips">
+                        <label class="chip"><input type="checkbox" name="psec" id="psec-portada" value="Portada" checked><span>Portada</span></label>
+                        <label class="chip"><input type="checkbox" name="psec" id="psec-problema" value="Problema u oportunidad" checked><span>Problema</span></label>
+                        <label class="chip"><input type="checkbox" name="psec" id="psec-propuesta" value="Propuesta" checked><span>Propuesta</span></label>
+                        <label class="chip"><input type="checkbox" name="psec" id="psec-analisis" value="Análisis" checked><span>Análisis</span></label>
+                        <label class="chip"><input type="checkbox" name="psec" id="psec-resultados" value="Resultados" checked><span>Resultados</span></label>
+                        <label class="chip"><input type="checkbox" name="psec" id="psec-conclusiones" value="Conclusiones" checked><span>Conclusiones</span></label>
+                        <label class="chip"><input type="checkbox" name="psec" id="psec-equipo" value="Equipo" checked><span>Equipo</span></label>
+                        <label class="chip"><input type="checkbox" name="psec" id="psec-fuentes" value="Fuentes"><span>Fuentes</span></label>
+                        <label class="chip"><input type="checkbox" name="psec" id="psec-contacto" value="Contacto"><span>Contacto</span></label>
+                      </div>
+                    </fieldset>
+                    <fieldset class="field field-wide">
+                      <legend>Extras</legend>
+                      <div class="chips">
+                        <label class="chip"><input type="checkbox" id="x-logo" checked><span>Logo o imagen principal</span></label>
+                        <label class="chip"><input type="checkbox" id="x-galeria"><span>Galería de fotos</span></label>
+                        <label class="chip"><input type="checkbox" id="x-informe" checked><span>Botón para el informe</span></label>
+                      </div>
+                    </fieldset>
+                  </div>
+                  <fieldset class="field field-wide">
+                    <legend>Idioma de la web</legend>
+                    <div class="chips">
+                      <label class="chip"><input type="radio" name="idioma" id="idioma-es" value="es" checked><span>Español</span></label>
+                      <label class="chip"><input type="radio" name="idioma" id="idioma-en" value="en"><span>Inglés</span></label>
+                      <label class="chip"><input type="radio" name="idioma" id="idioma-bi" value="bi"><span>Español e inglés</span></label>
+                    </div>
+                  </fieldset>
+                  <fieldset class="field field-wide">
+                    <legend>Estilo</legend>
+                    <div class="chips">
+                      <label class="chip"><input type="radio" name="estilo" id="estilo-elegante" value="elegante" checked><span>Elegante</span></label>
+                      <label class="chip"><input type="radio" name="estilo" id="estilo-minimalista" value="minimalista"><span>Minimalista</span></label>
+                      <label class="chip"><input type="radio" name="estilo" id="estilo-creativo" value="creativo"><span>Creativo</span></label>
+                      <label class="chip"><input type="radio" name="estilo" id="estilo-calido" value="calido"><span>Cálido</span></label>
+                    </div>
+                  </fieldset>
+                  <fieldset class="field field-wide">
+                    <legend>Colores</legend>
+                    <div class="chips">
+                      <label class="chip"><input type="radio" name="colores" id="color-rosa" value="rosa" checked><span><i class="swatch" style="--sa: #F2B8CB; --sb: #FFFFFF"></i>Rosa</span></label>
+                      <label class="chip"><input type="radio" name="colores" id="color-lila" value="lila"><span><i class="swatch" style="--sa: #C9B6E4; --sb: #FFFFFF"></i>Lila</span></label>
+                      <label class="chip"><input type="radio" name="colores" id="color-salvia" value="salvia"><span><i class="swatch" style="--sa: #A9C3A6; --sb: #F6F1E7"></i>Salvia</span></label>
+                      <label class="chip"><input type="radio" name="colores" id="color-azul" value="azul"><span><i class="swatch" style="--sa: #1F3A5F; --sb: #E8DCC4"></i>Azul y arena</span></label>
+                      <label class="chip"><input type="radio" name="colores" id="color-bn" value="bn"><span><i class="swatch" style="--sa: #111111; --sb: #FFFFFF"></i>Blanco y negro</span></label>
+                    </div>
+                  </fieldset>
+                  <div class="field field-wide"><label for="f-extra">Algo más (opcional)</label><input id="f-extra" type="text" placeholder="Ej.: una línea de tiempo con mis logros" autocomplete="off"></div>
+                </div>
+                <div class="out">
+                  <div class="out-head">
+                    <p class="out-label" id="promptLabel">Tu mensaje para Claude</p>
+                    <button class="btn btn-primary btn-sm" id="copyPrompt" type="button"><svg aria-hidden="true" focusable="false"><use href="#iconCopy"/></svg><span class="copy-label">Copiar mensaje</span></button>
+                  </div>
+                  <pre class="prompt" id="promptOut" tabindex="0" aria-labelledby="promptLabel"></pre>
+                  <p class="copy-status" id="copyStatus" role="status"></p>
+                </div>
+              </div>
+              <p class="sub-title">Después</p>
+              <ol class="sub">
+                <li>Entra a <a href="https://claude.ai/new" target="_blank" rel="noopener">claude.ai/new</a>, pega tu mensaje y envíalo.</li>
+                <li>Claude escribe el código y te muestra tu web. En la computadora aparece al costado del chat. En el celular aparece como una tarjeta que abres con un toque.</li>
+                <li>Pide cambios uno por uno y di en qué parte. Toca un ejemplo para copiarlo.
+                  <div class="examples" data-mode-only="personal">
+                    <button class="ex js-copy" type="button" data-copy="En la sección Sobre mí, haz el texto más corto y cercano."><svg class="i-copy" aria-hidden="true" focusable="false"><use href="#iconCopy"/></svg><svg class="i-check" aria-hidden="true" focusable="false"><use href="#iconCheck"/></svg>En la sección Sobre mí, haz el texto más corto y cercano.</button>
+                    <button class="ex js-copy" type="button" data-copy="En la portada, pon mi nombre más grande y elegante."><svg class="i-copy" aria-hidden="true" focusable="false"><use href="#iconCopy"/></svg><svg class="i-check" aria-hidden="true" focusable="false"><use href="#iconCheck"/></svg>En la portada, pon mi nombre más grande y elegante.</button>
+                    <button class="ex js-copy" type="button" data-copy="Muestra mis proyectos en tarjetas con foto, en dos columnas."><svg class="i-copy" aria-hidden="true" focusable="false"><use href="#iconCopy"/></svg><svg class="i-check" aria-hidden="true" focusable="false"><use href="#iconCheck"/></svg>Muestra mis proyectos en tarjetas con foto, en dos columnas.</button>
+                    <button class="ex js-copy" type="button" data-copy="Revisa que se vea perfecta en celular."><svg class="i-copy" aria-hidden="true" focusable="false"><use href="#iconCopy"/></svg><svg class="i-check" aria-hidden="true" focusable="false"><use href="#iconCheck"/></svg>Revisa que se vea perfecta en celular.</button>
+                  </div>
+                  <div class="examples" data-mode-only="proyecto" hidden>
+                    <button class="ex js-copy" type="button" data-copy="Agrega una franja con 3 datos clave en números grandes."><svg class="i-copy" aria-hidden="true" focusable="false"><use href="#iconCopy"/></svg><svg class="i-check" aria-hidden="true" focusable="false"><use href="#iconCheck"/></svg>Agrega una franja con 3 datos clave en números grandes.</button>
+                    <button class="ex js-copy" type="button" data-copy="Haz que la portada se vea más profesional."><svg class="i-copy" aria-hidden="true" focusable="false"><use href="#iconCopy"/></svg><svg class="i-check" aria-hidden="true" focusable="false"><use href="#iconCheck"/></svg>Haz que la portada se vea más profesional.</button>
+                    <button class="ex js-copy" type="button" data-copy="Pon el botón para descargar el informe más visible."><svg class="i-copy" aria-hidden="true" focusable="false"><use href="#iconCopy"/></svg><svg class="i-check" aria-hidden="true" focusable="false"><use href="#iconCheck"/></svg>Pon el botón para descargar el informe más visible.</button>
+                    <button class="ex js-copy" type="button" data-copy="Revisa que se vea perfecta en celular."><svg class="i-copy" aria-hidden="true" focusable="false"><use href="#iconCopy"/></svg><svg class="i-check" aria-hidden="true" focusable="false"><use href="#iconCheck"/></svg>Revisa que se vea perfecta en celular.</button>
+                  </div>
+                </li>
+                <li>Si un cambio no te gusta, escribe «Vuelve a la versión anterior».</li>
+                <li>Cuando te encante, pídele el código final.
+                  <div class="copy-line">
+                    <code id="finalAsk">Dame el código completo del archivo index.html en un solo bloque, para copiarlo.</code>
+                    <button class="btn btn-ghost btn-sm js-copy" type="button" data-copy-from="finalAsk"><svg aria-hidden="true" focusable="false"><use href="#iconCopy"/></svg><span class="js-label">Copiar</span></button>
+                  </div>
+                </li>
+                <li>Claude te responde con un bloque de código. Cópialo con el botón de copiar del bloque, no a mano.</li>
+              </ol>
+              <div class="tip"><p class="tip-title">Pide cambios concretos</p><p>Funciona mejor «En la sección Proyectos, pon las tarjetas en dos columnas» que «mejóralo». Di dónde y qué quieres. Si aparece un aviso de límite, espera unas horas y sigue en el mismo chat. El plan gratis se renueva solo.</p></div>
+              <div class="tip"><p class="tip-title">Revisa que esté completo</p><p>El código empieza con <code>&lt;!DOCTYPE html&gt;</code> y termina con <code>&lt;/html&gt;</code>. Si termina antes, está cortado. Escríbele «Continúa desde donde te quedaste» y pega esa parte justo debajo de la primera.</p></div>
+              <p class="check"><svg aria-hidden="true" focusable="false"><use href="#iconCheck"/></svg><span><b>Listo cuando</b> tienes copiado el código completo, desde <code>&lt;!DOCTYPE html&gt;</code> hasta <code>&lt;/html&gt;</code>.</span></p>
+            </div>
+            <button class="done-btn" type="button" aria-pressed="false" aria-describedby="t3"><span class="done-box"><svg aria-hidden="true" focusable="false"><use href="#iconCheck"/></svg></span><span class="done-label">Marcar como hecho</span></button>
+          </li>
+
+          <li class="step" id="paso-4">
+            <div class="step-head">
+              <span class="step-num" aria-hidden="true">4</span>
+              <div><h3 id="t4">Guárdala en GitHub</h3><p class="step-time">10 minutos</p></div>
+            </div>
+            <div class="step-body">
+              <p>Aquí creas la carpeta de tu web y guardas el código y tus archivos.</p>
+              <ol class="sub">
+                <li>En github.com, toca el <span class="ui">+</span> de arriba a la derecha y elige <span class="ui">New repository</span>.</li>
+                <li>En <span class="ui">Repository name</span> escribe un nombre corto, por ejemplo <code data-text="repo">portafolio</code>. Sin espacios, tildes ni ñ.</li>
+                <li>En la visibilidad elige <span class="ui">Public</span>. Deja apagadas las opciones de README, .gitignore y licencia.</li>
+                <li>Toca <span class="ui">Create repository</span>. Se abre una página que dice <span class="ui">Quick setup</span>.</li>
+                <li>Busca la frase «Get started by creating a new file or uploading an existing file» y toca <span class="ui">creating a new file</span>.</li>
+                <li>En la casilla del nombre, arriba, escribe exactamente <code>index.html</code>.</li>
+                <li>Pega el código en el área grande.</li>
+                <li>Toca el botón verde <span class="ui">Commit changes…</span>. En la ventanita aparece el mensaje «Create index.html». Déjalo así y toca <span class="ui">Commit changes</span>.</li>
+              </ol>
+              <p class="sub-title">Sube tus fotos y archivos</p>
+              <ol class="sub">
+                <li>En tu repositorio, toca <span class="ui">Add file</span> → <span class="ui">Upload files</span>.</li>
+                <li>Arrastra tus archivos (<span data-text="files">foto.jpg y cv.pdf</span>) y espera a que carguen.</li>
+                <li>Toca <span class="ui">Commit changes</span>.</li>
+              </ol>
+              <p class="note">Tus archivos tienen que quedar sueltos junto a <code>index.html</code>, con los mismos nombres que le diste a Claude. ¿Por qué <code>index.html</code>? Es el nombre de la página principal de una web. Si tu archivo se llama distinto, tu link va a mostrar un error.</p>
+              <p class="check"><svg aria-hidden="true" focusable="false"><use href="#iconCheck"/></svg><span><b>Listo cuando</b> en tu repositorio ves <code>index.html</code> y tus archivos en la lista.</span></p>
+            </div>
+            <button class="done-btn" type="button" aria-pressed="false" aria-describedby="t4"><span class="done-box"><svg aria-hidden="true" focusable="false"><use href="#iconCheck"/></svg></span><span class="done-label">Marcar como hecho</span></button>
+          </li>
+
+          <li class="step" id="paso-5">
+            <div class="step-head">
+              <span class="step-num" aria-hidden="true">5</span>
+              <div><h3 id="t5">Publícala con Vercel</h3><p class="step-time">5 minutos</p></div>
+            </div>
+            <div class="step-body">
+              <ol class="sub">
+                <li>Entra a <a href="https://vercel.com/new" target="_blank" rel="noopener">vercel.com/new</a>. Verás <span class="ui">Import Git Repository</span> con la lista de tus repositorios.</li>
+                <li>Si es la primera vez, Vercel te pide instalar su app en GitHub. Acepta y dale acceso a <span class="ui">All repositories</span>, o solo a <code data-text="repo">portafolio</code>.</li>
+                <li>Al lado de <code data-text="repo">portafolio</code>, toca <span class="ui">Import</span>.</li>
+                <li>En <span class="ui">Project Name</span> escribe el nombre de tu link, por ejemplo <code data-text="project">lily-portafolio</code>. Usa solo minúsculas, números y guiones.</li>
+                <li>Deja <span class="ui">Framework Preset</span> en <span class="ui">Other</span> y no toques nada más.</li>
+                <li>Toca <span class="ui">Deploy</span> y espera entre 20 segundos y un minuto.</li>
+                <li>Cuando veas la pantalla de felicitaciones, toca <span class="ui">Continue to Dashboard</span>. En <span class="ui">Domains</span> está tu link, por ejemplo <code data-text="link">lily-portafolio.vercel.app</code>. Toca <span class="ui">Visit</span> para abrirlo.</li>
+              </ol>
+              <div class="tip tip-win"><p class="tip-title">Ya está en internet</p><p>Abre tu link en el celular y revisa todo, desde los textos hasta las fotos y los botones. Si ese nombre ya lo tenía otra persona, Vercel le agrega algo al final del link.</p></div>
+              <p class="check"><svg aria-hidden="true" focusable="false"><use href="#iconCheck"/></svg><span><b>Listo cuando</b> abres tu link en el celular y ves tu web.</span></p>
+            </div>
+            <button class="done-btn" type="button" aria-pressed="false" aria-describedby="t5"><span class="done-box"><svg aria-hidden="true" focusable="false"><use href="#iconCheck"/></svg></span><span class="done-label">Marcar como hecho</span></button>
+          </li>
+
+          <li class="step" id="paso-6">
+            <div class="step-head">
+              <span class="step-num" aria-hidden="true">6</span>
+              <div><h3 id="t6">Compártela y mantenla al día</h3><p class="step-time">10 minutos</p></div>
+            </div>
+            <div class="step-body">
+              <div class="mode-block" data-mode-only="personal">
+                <p class="sub-title">Dónde poner tu link</p>
+                <ul class="sub">
+                  <li><b>Instagram.</b> <span class="ui">Editar perfil</span> → <span class="ui">Enlaces</span> → <span class="ui">Agregar enlace externo</span>.</li>
+                  <li><b>LinkedIn.</b> En tu perfil, <span class="ui">Información de contacto</span> → <span class="ui">Sitio web</span>.</li>
+                  <li><b>Tu CV.</b> Debajo de tu nombre, al lado de tu correo.</li>
+                </ul>
+              </div>
+              <div class="mode-block" data-mode-only="proyecto" hidden>
+                <p class="sub-title">Cómo compartir tu trabajo</p>
+                <ul class="sub">
+                  <li><b>Con tu profesor.</b> Mándale el link o súbelo al aula virtual junto con tu informe.</li>
+                  <li><b>En tu exposición.</b> Ponlo en la última diapositiva como código QR. En Canva, la app <span class="ui">QR Code</span> lo crea con tu link.</li>
+                  <li><b>En tu portafolio.</b> Agrega el link en tu sección de Proyectos.</li>
+                </ul>
+              </div>
+              <p class="sub-title">Para cambiar algo después</p>
+              <ol class="sub">
+                <li>Pídele el cambio a Claude en el mismo chat y copia el código completo nuevo.</li>
+                <li>En GitHub abre <code>index.html</code> y toca el lápiz (<span class="ui">Edit this file</span>).</li>
+                <li>Selecciona todo con <kbd>Ctrl</kbd> + <kbd>A</kbd> y pega el código nuevo encima.</li>
+                <li>Toca <span class="ui">Commit changes…</span> y otra vez <span class="ui">Commit changes</span>.</li>
+                <li>En un minuto, Vercel la actualiza. En la pestaña <span class="ui">Deployments</span> verás <span class="ui">Ready</span> cuando esté lista.</li>
+              </ol>
+              <p class="note">En Mac usa <kbd>Cmd</kbd> en vez de <kbd>Ctrl</kbd>.</p>
+              <p class="check"><svg aria-hidden="true" focusable="false"><use href="#iconCheck"/></svg><span><b>Listo cuando</b> tu link está donde la gente lo va a ver.</span></p>
+            </div>
+            <button class="done-btn" type="button" aria-pressed="false" aria-describedby="t6"><span class="done-box"><svg aria-hidden="true" focusable="false"><use href="#iconCheck"/></svg></span><span class="done-label">Marcar como hecho</span></button>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint" id="diccionario">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Mini diccionario</p>
+        <h2>Palabras que vas a ver</h2>
+      </div>
+      <dl class="glossary">
+        <div><dt>Prompt</dt><dd>El mensaje con instrucciones que le escribes a Claude.</dd></div>
+        <div><dt>Código</dt><dd>El texto con instrucciones que el navegador lee para mostrar tu página. Claude lo escribe por ti.</dd></div>
+        <div><dt>HTML</dt><dd>El lenguaje en el que está escrita tu web.</dd></div>
+        <div><dt>index.html</dt><dd>El archivo principal de una web. Es su portada.</dd></div>
+        <div><dt>Repositorio</dt><dd>La carpeta de cada web en GitHub. También le dicen «repo».</dd></div>
+        <div><dt>Commit</dt><dd>Guardar un cambio en GitHub. Cada commit queda registrado, así que puedes volver a una versión anterior.</dd></div>
+        <div><dt>Deploy</dt><dd>Publicar tu web en internet. Vercel lo hace por ti cada vez que guardas un cambio.</dd></div>
+        <div><dt>Dominio</dt><dd>La dirección de tu web, como <code>lily-portafolio.vercel.app</code>.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section" id="dudas">
+    <div class="wrap faq-grid">
+      <div class="section-head">
+        <p class="eyebrow">Si algo sale mal</p>
+        <h2>Dudas frecuentes</h2>
+        <p class="section-lead">Las pantallas de GitHub, Vercel y Claude cambian un poco con el tiempo. Si un botón no se ve igual, busca el que diga algo parecido.</p>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>Abro mi link y sale un error 404</summary>
+          <p>Revisa que el archivo se llame exactamente <code>index.html</code>, todo en minúsculas, y que esté suelto en tu repositorio y no dentro de una carpeta.</p>
+        </details>
+        <details>
+          <summary>Mi web se ve rota o sin diseño</summary>
+          <p>Casi siempre es código incompleto. Abre <code>index.html</code> en GitHub y revisa que termine en <code>&lt;/html&gt;</code>. Si no, pídele el código completo a Claude y vuelve a pegarlo.</p>
+        </details>
+        <details>
+          <summary>En Vercel no aparece mi repositorio</summary>
+          <p>Vercel necesita permiso para ver tus repositorios. En la pantalla de importar, busca el enlace para ajustar los permisos de GitHub, que suele decir «Adjust GitHub App Permissions», y dale acceso a ese repositorio.</p>
+        </details>
+        <details>
+          <summary>Mi foto no aparece</summary>
+          <p>El nombre del archivo tiene que ser idéntico al del código y tiene que estar suelto junto a <code>index.html</code>. Para la web, <code>foto.jpg</code>, <code>Foto.jpg</code> y <code>foto.jpeg</code> son tres archivos distintos.</p>
+        </details>
+        <details>
+          <summary>GitHub no me deja subir un archivo</summary>
+          <p>Desde el navegador, cada archivo puede pesar hasta 25 MB. Reduce la imagen o el PDF y vuelve a intentarlo.</p>
+        </details>
+        <details>
+          <summary>Cambié algo y mi web sigue igual</summary>
+          <p>Espera un minuto y recarga la página. Si sigue igual, revisa en GitHub que hayas confirmado con <span class="ui">Commit changes</span>, y en Vercel que el último deploy diga <span class="ui">Ready</span>.</p>
+        </details>
+        <details>
+          <summary>Claude no me muestra la vista previa</summary>
+          <p>En la configuración de Claude, en la parte de capacidades, revisa que esté activada la ejecución de código y creación de archivos. Igual puedes pedirle el código y seguir con los pasos.</p>
+        </details>
+        <details>
+          <summary>Claude dice que llegué al límite</summary>
+          <p>El plan gratis tiene un límite de mensajes que se renueva cada pocas horas. Espera un rato y sigue en el mismo chat, así Claude recuerda tu web.</p>
+        </details>
+        <details>
+          <summary>¿Puedo tener un link con mi nombre, como tunombre.com?</summary>
+          <p>Sí. Tendrías que comprar un dominio, que se paga cada año, y conectarlo en Vercel desde <span class="ui">Settings</span> → <span class="ui">Domains</span>. Es opcional. Tu link <code>.vercel.app</code> funciona perfecto.</p>
+        </details>
+        <details>
+          <summary>¿Cómo borro una web que ya no uso?</summary>
+          <p>En Vercel, entra al proyecto, ve a <span class="ui">Settings</span> y busca <span class="ui">Delete Project</span> al final. En GitHub, entra al repositorio, ve a <span class="ui">Settings</span> y en <span class="ui">Danger Zone</span> toca <span class="ui">Delete this repository</span>.</p>
+        </details>
+        <details>
+          <summary>¿Y si me trabo en algún paso?</summary>
+          <p>Cuéntale a Claude en qué paso estás y qué ves en tu pantalla. También puedes mandarle una captura. Y si sigues trabada, me escribes.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <p class="foot-sign"><svg class="foot-lily" viewBox="-110 -110 220 220" aria-hidden="true" focusable="false"><use href="#lilyBloom"/></svg></p>
+    <p>Octubre de 2026</p>
+  </div>
+</footer>
+<p class="sr-only" id="liveRegion" aria-live="polite"></p>
+
+<script>
+(function () {
+  var KEY = 'lily-portafolio-v1';
+  var MODES = ['personal', 'proyecto'];
+  function blank() { return [false, false, false, false, false, false]; }
+  var state = { mode: 'personal', done: { personal: blank(), proyecto: blank() }, builder: null };
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (saved) {
+      if (Array.isArray(saved.done) && saved.done.length === 6) {
+        state.done.personal = saved.done.map(Boolean);
+      } else if (saved.done && typeof saved.done === 'object') {
+        MODES.forEach(function (m) {
+          if (Array.isArray(saved.done[m]) && saved.done[m].length === 6) state.done[m] = saved.done[m].map(Boolean);
+        });
+      }
+      if (MODES.indexOf(saved.mode) !== -1) state.mode = saved.mode;
+      if (saved.builder && typeof saved.builder === 'object') state.builder = saved.builder;
+    }
+  } catch (e) {}
+  function persist() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+  function $(id) { return document.getElementById(id); }
+  function each(list, fn) { Array.prototype.forEach.call(list, fn); }
+  var live = $('liveRegion');
+  function announce(text) { live.textContent = ''; setTimeout(function () { live.textContent = text; }, 30); }
+
+  /* Modo: portafolio o web de un trabajo */
+  var TEXTS = {
+    personal: { repo: 'portafolio', project: 'lily-portafolio', link: 'lily-portafolio.vercel.app', files: 'foto.jpg y cv.pdf' },
+    proyecto: { repo: 'plan-cafeteria', project: 'plan-cafeteria', link: 'plan-cafeteria.vercel.app', files: 'logo.png, tus fotos e informe.pdf' }
+  };
+  function applyMode() {
+    var m = state.mode;
+    each(document.querySelectorAll('[data-mode-only]'), function (el) { el.hidden = el.getAttribute('data-mode-only') !== m; });
+    each(document.querySelectorAll('[data-text]'), function (el) {
+      var t = TEXTS[m][el.getAttribute('data-text')];
+      if (t) el.textContent = t;
+    });
+    each(document.querySelectorAll('input[name="modo"]'), function (r) {
+      r.checked = r.value === m;
+      r.closest('.mode-card').classList.toggle('is-selected', r.value === m);
+    });
+    each(document.querySelectorAll('[data-set-mode]'), function (b) {
+      b.setAttribute('aria-pressed', b.getAttribute('data-set-mode') === m ? 'true' : 'false');
+    });
+  }
+
+  /* Progreso: seis pasos, seis pétalos */
+  var steps = document.querySelectorAll('.step');
+  var MSGS = [
+    'Empieza por el paso 1.',
+    'Primer pétalo abierto.',
+    'Vas muy bien.',
+    'Ya vas por la mitad.',
+    'Faltan dos pétalos.',
+    'Falta uno. Ya casi.',
+    '¡Floreció, Lily! Tu web ya está en internet. Mándame el link.'
+  ];
+  function render() {
+    var done = state.done[state.mode];
+    var n = done.filter(Boolean).length;
+    each(steps, function (el, i) {
+      var d = !!done[i];
+      el.classList.toggle('is-done', d);
+      var b = el.querySelector('.done-btn');
+      b.setAttribute('aria-pressed', d ? 'true' : 'false');
+      b.querySelector('.done-label').textContent = d ? 'Hecho' : 'Marcar como hecho';
+    });
+    each(document.querySelectorAll('#lilyProgress .petal, .lily-mini .mp'), function (p) {
+      p.classList.toggle('open', Number(p.getAttribute('data-i')) < n);
+    });
+    $('bloomCount').textContent = String(n);
+    $('miniCount').textContent = n + '/6';
+    var what = state.mode === 'proyecto' ? 'la web de tu trabajo' : 'tu portafolio';
+    $('miniProgress').setAttribute('aria-label', 'Llevas ' + n + ' de 6 pasos de ' + what + '. Ir a los pasos');
+    var msg = $('bloomMsg');
+    msg.textContent = MSGS[n];
+    msg.classList.toggle('done', n === 6);
+    $('lilyProgress').classList.toggle('full', n === 6);
+  }
+  each(steps, function (el, i) {
+    el.querySelector('.done-btn').addEventListener('click', function () {
+      var arr = state.done[state.mode];
+      arr[i] = !arr[i];
+      persist();
+      render();
+    });
+  });
+
+  /* Generador del mensaje para Claude */
+  var builder = $('builder');
+  var out = $('promptOut');
+  var ESTILOS = {
+    elegante: 'elegante y delicado',
+    minimalista: 'minimalista, con mucho espacio en blanco',
+    creativo: 'creativo y con personalidad',
+    calido: 'cálido y cercano'
+  };
+  var COLORES = {
+    rosa: 'rosa suave y blanco',
+    lila: 'lila y blanco',
+    salvia: 'verde salvia y blanco roto',
+    azul: 'azul marino y arena',
+    bn: 'blanco y negro, con un solo color de acento'
+  };
+  var IDIOMAS = {
+    es: 'Escribe todos los textos en español.',
+    en: 'Escribe todos los textos en inglés.',
+    bi: 'Hazla bilingüe, en español e inglés, con un botón para cambiar de idioma.'
+  };
+  var PUBLICOS = {
+    profesor: { quien: 'mi profesor y mis compañeros', tono: 'claro y académico' },
+    jurado: { quien: 'el jurado de un concurso', tono: 'profesional y convincente' },
+    clientes: { quien: 'clientes o inversionistas', tono: 'profesional y comercial, que invite a contactarnos' },
+    general: { quien: 'público en general', tono: 'cercano y fácil de entender' }
+  };
+  function checkedValue(name) { var el = builder.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : null; }
+  function checkedValues(name) { return Array.prototype.map.call(builder.querySelectorAll('input[name="' + name + '"]:checked'), function (i) { return i.value; }); }
+  function joinList(arr) { if (arr.length < 2) return arr[0] || ''; return arr.slice(0, -1).join(', ') + ' y ' + arr[arr.length - 1]; }
+  function val(id, fallback) { var x = $(id).value.trim(); return x || fallback; }
+  function on(id) { return $(id).checked; }
+  function styleLine() {
+    return 'Estilo ' + ESTILOS[checkedValue('estilo') || 'elegante'] + ', con colores ' + COLORES[checkedValue('colores') || 'rosa'] + '. Usa tipografías bonitas de Google Fonts y animaciones suaves.';
+  }
+  function closing(lines, extras, files) {
+    var mas = $('f-extra').value.trim();
+    if (mas) extras.push('Además: ' + mas);
+    if (extras.length) lines = lines.concat([''], extras);
+    lines.push('', 'Detalles técnicos:');
+    lines.push('- Todo en un solo archivo llamado index.html, con el HTML, el CSS y el JavaScript adentro y sin librerías que haya que instalar. Lo voy a publicar en Vercel.');
+    if (files.length) lines.push('- Mis archivos van en la misma carpeta que index.html: ' + joinList(files) + '.');
+    lines.push('- No uses imágenes de internet. Donde falte una foto, usa formas o colores.');
+    lines.push('- Que se vea perfecta en celular y en computadora.');
+    lines.push('', 'Donde falte información, pon textos de ejemplo entre corchetes para que yo los cambie después. Muéstrame la vista previa.');
+    return lines.join('\n');
+  }
+  function buildPersonal() {
+    var secs = checkedValues('sec');
+    var lines = [
+      'Hola, Claude. Quiero crear mi portafolio personal: una página web de una sola página.',
+      '',
+      'Sobre mí:',
+      '- Me llamo ' + val('f-nombre', '[tu nombre]') + '.',
+      '- Estudio ' + val('f-carrera', '[tu carrera]') + ' en la ' + val('f-uni', '[tu universidad]') + '.',
+      '- En una frase: ' + val('f-frase', '[una frase sobre ti]'),
+      '',
+      'Secciones, en este orden: ' + (secs.length ? joinList(secs) : 'Sobre mí y Contacto') + '.',
+      '',
+      styleLine(),
+      IDIOMAS[checkedValue('idioma') || 'es']
+    ];
+    var extras = [], files = [];
+    if (on('x-foto')) { extras.push('Arriba va mi foto en un círculo (foto.jpg).'); files.push('foto.jpg'); }
+    if (on('x-cv')) { extras.push('Agrega un botón para descargar mi CV (cv.pdf).'); files.push('cv.pdf'); }
+    return closing(lines, extras, files);
+  }
+  function buildProyecto() {
+    var secs = checkedValues('psec');
+    var pub = PUBLICOS[checkedValue('publico') || 'profesor'];
+    var lines = [
+      'Hola, Claude. Quiero crear una página web para presentar un trabajo: una web de una sola página.',
+      '',
+      'Sobre el trabajo:',
+      '- Nombre: ' + val('p-nombre', '[nombre del trabajo]'),
+      '- Contexto: ' + val('p-contexto', '[curso, profesor o evento]'),
+      '- De qué trata: ' + val('p-resumen', '[una frase que lo explique]'),
+      '- Integrantes: ' + val('p-equipo', '[nombres del equipo]'),
+      '- La va a ver: ' + pub.quien,
+      '',
+      'Secciones, en este orden: ' + (secs.length ? joinList(secs) : 'Portada, Propuesta y Contacto') + '.',
+      '',
+      styleLine() + ' El tono debe ser ' + pub.tono + '.',
+      IDIOMAS[checkedValue('idioma') || 'es']
+    ];
+    var extras = [], files = [];
+    if (on('x-logo')) { extras.push('En la portada va el logo o la imagen principal (logo.png).'); files.push('logo.png'); }
+    if (on('x-galeria')) { extras.push('Agrega una galería con 3 fotos (foto-1.jpg, foto-2.jpg y foto-3.jpg).'); files.push('foto-1.jpg', 'foto-2.jpg', 'foto-3.jpg'); }
+    if (on('x-informe')) { extras.push('Agrega un botón para descargar el informe completo (informe.pdf).'); files.push('informe.pdf'); }
+    return closing(lines, extras, files);
+  }
+  function update() { out.textContent = state.mode === 'proyecto' ? buildProyecto() : buildPersonal(); }
+  function saveBuilder() {
+    var b = { text: {}, radio: {}, check: {} };
+    each(builder.querySelectorAll('input[type="text"]'), function (i) { b.text[i.id] = i.value; });
+    each(builder.querySelectorAll('input[type="radio"]:checked'), function (i) { b.radio[i.name] = i.value; });
+    each(builder.querySelectorAll('input[type="checkbox"]'), function (i) { b.check[i.id] = i.checked; });
+    state.builder = b;
+    persist();
+  }
+  function restoreBuilder() {
+    var b = state.builder;
+    if (!b) return;
+    if (!b.text && !b.radio && !b.check) {
+      var legacy = { text: {}, radio: {}, check: {} };
+      ['f-nombre', 'f-carrera', 'f-uni', 'f-frase'].forEach(function (id) { if (typeof b[id] === 'string') legacy.text[id] = b[id]; });
+      if (b.estilo) legacy.radio.estilo = b.estilo;
+      if (b.colores) legacy.radio.colores = b.colores;
+      if (typeof b.foto === 'boolean') legacy.check['x-foto'] = b.foto;
+      if (typeof b.cv === 'boolean') legacy.check['x-cv'] = b.cv;
+      if (Array.isArray(b.sec)) each(builder.querySelectorAll('input[name="sec"]'), function (c) { legacy.check[c.id] = b.sec.indexOf(c.value) !== -1; });
+      b = legacy;
+    }
+    Object.keys(b.text || {}).forEach(function (id) { var el = $(id); if (el && typeof b.text[id] === 'string') el.value = b.text[id]; });
+    Object.keys(b.radio || {}).forEach(function (name) {
+      each(builder.querySelectorAll('input[type="radio"]'), function (r) { if (r.name === name) r.checked = r.value === b.radio[name]; });
+    });
+    Object.keys(b.check || {}).forEach(function (id) { var el = $(id); if (el && el.type === 'checkbox') el.checked = !!b.check[id]; });
+  }
+
+  function setMode(m) {
+    if (MODES.indexOf(m) === -1 || m === state.mode) return;
+    state.mode = m;
+    persist();
+    applyMode();
+    render();
+    update();
+  }
+  each(document.querySelectorAll('input[name="modo"]'), function (r) {
+    r.addEventListener('change', function () { if (r.checked) setMode(r.value); });
+  });
+  each(document.querySelectorAll('[data-set-mode]'), function (b) {
+    b.addEventListener('click', function () { setMode(b.getAttribute('data-set-mode')); });
+  });
+
+  applyMode();
+  restoreBuilder();
+  update();
+  render();
+  builder.addEventListener('input', function () { update(); saveBuilder(); });
+  builder.addEventListener('change', function () { update(); saveBuilder(); });
+
+  /* Copiar */
+  function legacyCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '0';
+    ta.style.left = '0';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+  function copyText(text) {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(text).then(function () { return true; }, function () { return legacyCopy(text); });
+      }
+    } catch (e) {}
+    return Promise.resolve(legacyCopy(text));
+  }
+  function selectContents(el) {
+    try {
+      var r = document.createRange();
+      r.selectNodeContents(el);
+      var s = window.getSelection();
+      s.removeAllRanges();
+      s.addRange(r);
+    } catch (e) {}
+  }
+
+  var copyBtn = $('copyPrompt');
+  var copyLabel = copyBtn.querySelector('.copy-label');
+  var status = $('copyStatus');
+  var copyTimer;
+  copyBtn.addEventListener('click', function () {
+    copyText(out.textContent).then(function (ok) {
+      clearTimeout(copyTimer);
+      if (ok) {
+        copyLabel.textContent = 'Copiado';
+        status.textContent = 'Listo. Ahora pégalo en un chat nuevo de Claude.';
+      } else {
+        selectContents(out);
+        status.textContent = 'Tu navegador no dejó copiar. El texto ya está seleccionado. Cópialo con Ctrl + C o manteniendo presionado en el celular.';
+      }
+      copyTimer = setTimeout(function () { copyLabel.textContent = 'Copiar mensaje'; }, 2200);
+    });
+  });
+
+  each(document.querySelectorAll('.js-copy'), function (btn) {
+    var label = btn.querySelector('.js-label');
+    var original = label ? label.textContent : '';
+    var timer;
+    btn.addEventListener('click', function () {
+      var fromId = btn.getAttribute('data-copy-from');
+      var source = fromId ? $(fromId) : null;
+      var text = source ? source.textContent : (btn.getAttribute('data-copy') || '');
+      copyText(text).then(function (ok) {
+        clearTimeout(timer);
+        if (ok) {
+          btn.classList.add('copied');
+          if (label) label.textContent = 'Copiado';
+          announce('Copiado');
+        } else {
+          if (source) selectContents(source);
+          if (label) label.textContent = 'Cópialo a mano';
+          announce('No se pudo copiar. Cópialo a mano.');
+        }
+        timer = setTimeout(function () {
+          btn.classList.remove('copied');
+          if (label) label.textContent = original;
+        }, 1800);
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
